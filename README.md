@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Robin-lad/collegues-front.svg?branch=master)](https://travis-ci.org/Robin-lad/collegues-front)
+https://robin-lad.github.io/collegues-front/
+
 # ColleguesFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.

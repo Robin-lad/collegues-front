@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-header">
+    <label>Recherche par nom : </label>
+    <input type="text" class="form-control form-control-sm d-inline" placeholder="Nom" style="width: 16rem;"
+      #nomRecherche>
+    <button (click)="rechercher(nomRecherche);" type="button" class="btn btn-secondary btn-sm"
+      style="float: right;">Rechercher</button>
+  </div>
+  <div class="card-body">
+    <table *ngIf="listRecherche.length > 0" class="table table-sm table-striped">
+      <tr>
+        <th>
+          Matricule
+        </th>
+      </tr>
+      <tr *ngFor="let matricule of listRecherche">
+        <td>{{matricule}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

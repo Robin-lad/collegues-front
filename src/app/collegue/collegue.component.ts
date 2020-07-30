@@ -21,7 +21,6 @@ export class CollegueComponent implements OnInit {
 
   modif(): void {
     this.textShow = false;
-    console.log('Modification du collegue');
   }
 
   tmpEmail(newEmail: HTMLInputElement): void {
@@ -33,7 +32,6 @@ export class CollegueComponent implements OnInit {
   }
 
   valider(): void {
-    console.log(this.newEmail);
     if (this.newEmail !== undefined) {
       this.col.email = this.newEmail;
     }
@@ -41,7 +39,6 @@ export class CollegueComponent implements OnInit {
     if (this.newImgUrl !== undefined) {
       this.col.photoUrl = this.newImgUrl;
     }
-    console.log('Validation modif du collegue');
     this.textShow = true;
   }
 

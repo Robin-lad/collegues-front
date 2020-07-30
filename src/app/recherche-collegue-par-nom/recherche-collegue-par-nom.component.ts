@@ -23,5 +23,9 @@ export class RechercheCollegueParNomComponent implements OnInit {
       this.listRecherche = [];
       this.listRecherche.push(this.fullList.get(nomRecherche.value));
     }
+
+    if (nomRecherche.value === '') {
+      this.listRecherche = Array.from(this.fullList.values());
+    }
   }
 }

@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+.container-fluid {
+  margin: 2rem;
+}
+
+#rechercheCard {
+  max-width: 35rem;
+}
+
+#infosCard {
+  max-width: 27rem;
+}

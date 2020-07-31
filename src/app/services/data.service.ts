@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from, interval, Subject } from 'rxjs';
-import { delay, map, filter, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { Collegue } from '../models/Collegue';
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { creation } from '../mock/matricule.mock';
+import { DataService } from '../services/data.service';
+
 
 @Component({
   selector: 'app-recherche-collegue-par-nom',
@@ -9,23 +10,18 @@ import { creation } from '../mock/matricule.mock';
 export class RechercheCollegueParNomComponent implements OnInit {
 
   listRecherche: string[];
-  fullList: Map<string, string>;
 
-  constructor() { }
+  constructor(private dataServ: DataService) { }
 
   ngOnInit(): void {
-    this.fullList = creation();
-    this.listRecherche = Array.from(this.fullList.values());
+    this.listRecherche = [];
   }
 
   rechercher(nomRecherche: HTMLInputElement): void {
-    if (this.fullList.has(nomRecherche.value)) {
-      this.listRecherche = [];
-      this.listRecherche.push(this.fullList.get(nomRecherche.value));
-    }
-
-    if (nomRecherche.value === '') {
-      this.listRecherche = Array.from(this.fullList.values());
-    }
+    this.dataServ.rechercherParNom(nomRecherche.value).subscribe(
+      v => this.listRecherche = v,
+      err => { },
+      () => { }
+    );
   }
 }

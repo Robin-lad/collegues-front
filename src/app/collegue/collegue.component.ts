@@ -1,22 +1,26 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-collegue',
   templateUrl: './collegue.component.html',
-  styleUrls: ['./collegue.component.css']
+  styleUrls: ['./collegue.component.css'],
+  providers: [
+    DataService
+  ]
 })
 export class CollegueComponent implements OnInit {
 
-  @Input()
   col: Collegue;
   textShow = true;
   newEmail: string;
   newImgUrl: string;
 
-  constructor() { }
+  constructor(private dataServ: DataService) { }
 
   ngOnInit(): void {
+    this.col = this.dataServ.recupererCollegueCourant();
   }
 
   modif(): void {

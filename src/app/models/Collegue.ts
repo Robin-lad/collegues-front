@@ -1,4 +1,8 @@
-export class Collegue {
+export interface Collegue {
+  matricule: string;
+  nom: string;
+  prenoms: string;
+  email: string;
+  dateDeNaissance: Date;
   photoUrl: string;
-  constructor(public matricule: string, public nom: string, public prenoms: string, public dateDeNaissance: Date, public email: string) { }
 }

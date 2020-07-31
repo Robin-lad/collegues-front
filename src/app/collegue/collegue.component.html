@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12 col-lg-3">
-    <img src={{col.photoUrl}} alt="photo" class="img-thumbnail" style="width: 21rem; height:15rem;">
+    <img *ngIf="col!==undefined" src={{col.photoUrl}} alt="photo" class="img-thumbnail"
+      style="width: 21rem; height:15rem;">
   </div>
   <div class="col-12 col-lg-9">
     <div id="infosCard" class="card">
@@ -13,25 +14,25 @@
             </tr>
             <tr>
               <td>Matricule</td>
-              <td>{{col.matricule}}</td>
+              <td *ngIf="col!==undefined">{{col.matricule}}</td>
             </tr>
             <tr>
               <td>Nom</td>
-              <td>{{col.nom|uppercase}}</td>
+              <td *ngIf="col!==undefined">{{col.nom|uppercase}}</td>
             </tr>
             <tr>
               <td>Prénoms</td>
-              <td>{{col.prenoms}}</td>
+              <td *ngIf="col!==undefined">{{col.prenoms}}</td>
             </tr>
             <tr>
               <td>Date de naissance</td>
-              <td>
+              <td *ngIf="col!==undefined">
                 {{col.dateDeNaissance|date: 'MM/dd/yyyy'}}
               </td>
             </tr>
             <tr>
               <td>Email</td>
-              <td>
+              <td *ngIf="col!==undefined">
                 <ng-container *ngIf="textShow">
                   {{col.email}}
                 </ng-container>
@@ -43,8 +44,8 @@
             <ng-container *ngIf="!textShow">
               <tr>
                 <td>Image URL</td>
-                <td><input type="text" (change)="tmpImgUrl(newImageUrl)" class="form-control form-control-sm"
-                    placeholder="URL de l'image" #newImageUrl>
+                <td *ngIf="col!==undefined"><input type="text" (change)="tmpImgUrl(newImageUrl)"
+                    class="form-control form-control-sm" placeholder="URL de l'image" #newImageUrl>
                 </td>
               </tr>
             </ng-container>

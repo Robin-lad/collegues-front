@@ -1,16 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-collegue',
   templateUrl: './collegue.component.html',
   styleUrls: ['./collegue.component.css'],
-  providers: [
-    DataService
-  ]
+  providers: []
 })
 export class CollegueComponent implements OnInit {
+
+  collegueSelectionne: Subscription;
 
   col: Collegue;
   textShow = true;
@@ -20,7 +21,10 @@ export class CollegueComponent implements OnInit {
   constructor(private dataServ: DataService) { }
 
   ngOnInit(): void {
-    this.col = this.dataServ.recupererCollegueCourant();
+    this.dataServ.sabonnerAColSelect().subscribe(
+      v => { this.col = v; console.log(v); },
+      err => console.log(err)
+    );
   }
 
   modif(): void {

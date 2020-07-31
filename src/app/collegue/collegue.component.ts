@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./collegue.component.css'],
   providers: []
 })
-export class CollegueComponent implements OnInit {
+export class CollegueComponent implements OnInit, OnDestroy {
 
   collegueSelectionne: Subscription;
 
@@ -21,10 +21,14 @@ export class CollegueComponent implements OnInit {
   constructor(private dataServ: DataService) { }
 
   ngOnInit(): void {
-    this.dataServ.sabonnerAColSelect().subscribe(
-      v => { this.col = v; console.log(v); },
+    this.collegueSelectionne = this.dataServ.sabonnerAColSelect().subscribe(
+      v => this.col = v,
       err => console.log(err)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.collegueSelectionne.unsubscribe();
   }
 
   modif(): void {

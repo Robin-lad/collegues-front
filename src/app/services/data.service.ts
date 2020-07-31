@@ -12,9 +12,7 @@ export class DataService {
 
   subjectColSelectionne = new Subject<Collegue>();
 
-  constructor(private http: HttpClient) {
-    console.log('test');
-  }
+  constructor(private http: HttpClient) { }
 
   selectionner(mat: string): Observable<Collegue> {
     return this.collegueSelectionneInfo(mat).pipe(
@@ -33,6 +31,4 @@ export class DataService {
   rechercherParNom(nom: string): Observable<string[]> {
     return this.http.get<string[]>(`https://robin-collegue-app.herokuapp.com/collegues?nom=${nom}`);
   }
-
-
 }

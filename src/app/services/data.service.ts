@@ -4,6 +4,14 @@ import { Observable, from, interval, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Collegue } from '../models/Collegue';
+import { NewCollegue } from '../models/NewCollegue';
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +38,9 @@ export class DataService {
 
   rechercherParNom(nom: string): Observable<string[]> {
     return this.http.get<string[]>(`https://robin-collegue-app.herokuapp.com/collegues?nom=${nom}`);
+  }
+
+  creationCollegue(newCollegue: NewCollegue): Observable<Collegue> {
+    return this.http.post<Collegue>(`https://robin-collegue-app.herokuapp.com/collegues`, JSON.stringify(newCollegue), httpOptions);
   }
 }

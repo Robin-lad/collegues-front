@@ -4,7 +4,7 @@ import { Collegue } from '../models/Collegue';
 import { NewCollegue } from '../models/NewCollegue';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
-
+import { UpdateColEmailPhoto } from '../models/UpdateColEmailPhoto';
 
 @Component({
   selector: 'app-ngbd-modal-content',
@@ -16,7 +16,6 @@ import { Subscription } from 'rxjs';
       </button>
     </div>
     <div class="modal-body">
-      {{newCollegue | json}}
       <form #etatForm="ngForm">
         <div class="form-group">
           <label for="nom">Nom</label>
@@ -62,15 +61,12 @@ import { Subscription } from 'rxjs';
     <div class="modal-footer">
       <button *ngIf="etatForm.valid" type="button" ngbAutofocus class="btn btn-outline-dark" (click)="creerCollegue();">Créer</button>
     </div>
-    {{testAffichage | json}}
   `,
   styles: ['.alert-danger { margin-top: 6px; padding-top: 6px; padding-bottom: 6px; padding-left: 12px; padding-right:12px}']
 })
 export class NgbdModalContentComponent implements OnInit {
 
   newCollegue: NewCollegue;
-
-  testAffichage: Collegue;
 
   ngOnInit(): void {
     this.newCollegue = {};
@@ -80,7 +76,6 @@ export class NgbdModalContentComponent implements OnInit {
 
   creerCollegue(): void {
     this.dataServ.creationCollegue(this.newCollegue).subscribe(
-      v => this.testAffichage = v,
       err => { },
       () => { }
     );
@@ -101,6 +96,8 @@ export class CollegueComponent implements OnInit, OnDestroy {
   textShow = true;
   newEmail: string;
   newImgUrl: string;
+
+  newValues: UpdateColEmailPhoto = {};
 
   constructor(private dataServ: DataService, private modalService: NgbModal) { }
 
@@ -132,7 +129,17 @@ export class CollegueComponent implements OnInit, OnDestroy {
     this.newImgUrl = newImgUrl.value;
   }
 
-  // TODO A MODIFIER EN BASE ET PAS EN LOCAL (suite du TP)
+  updateCol(): void {
+    this.newValues.matricule = this.col.matricule;
+    this.newValues.email = this.col.email;
+    this.newValues.photoUrl = this.col.photoUrl;
+
+    this.dataServ.updateCollegue(this.newValues).subscribe(
+      err => { },
+      () => { }
+    );
+  }
+
   valider(): void {
     if (this.newEmail !== undefined) {
       this.col.email = this.newEmail;
@@ -141,6 +148,9 @@ export class CollegueComponent implements OnInit, OnDestroy {
     if (this.newImgUrl !== undefined) {
       this.col.photoUrl = this.newImgUrl;
     }
+
+    this.updateCol();
+
     this.textShow = true;
   }
 }

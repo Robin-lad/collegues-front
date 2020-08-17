@@ -1,9 +1,10 @@
+import { Collegue } from '../models/Collegue';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from, interval, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Collegue } from '../models/Collegue';
+import { UpdateColEmailPhoto } from '../models/UpdateColEmailPhoto';
 import { NewCollegue } from '../models/NewCollegue';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -41,6 +42,10 @@ export class DataService {
   }
 
   creationCollegue(newCollegue: NewCollegue): Observable<Collegue> {
-    return this.http.post<Collegue>(`https://robin-collegue-app.herokuapp.com/collegues`, JSON.stringify(newCollegue), httpOptions);
+    return this.http.post<Collegue>(`https://robin-collegue-app.herokuapp.com/collegues`, newCollegue, httpOptions);
+  }
+
+  updateCollegue(updateColValues: UpdateColEmailPhoto): Observable<void> {
+    return this.http.patch<void>(`https://robin-collegue-app.herokuapp.com/collegues`, updateColValues, httpOptions);
   }
 }

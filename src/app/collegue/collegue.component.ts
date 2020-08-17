@@ -149,7 +149,11 @@ export class CollegueComponent implements OnInit, OnDestroy {
       this.col.photoUrl = this.newImgUrl;
     }
 
-    this.updateCol();
+    if ((this.newImgUrl !== undefined) || (this.newEmail !== undefined)) {
+      this.updateCol();
+      this.newEmail = undefined;
+      this.newImgUrl = undefined;
+    }
 
     this.textShow = true;
   }

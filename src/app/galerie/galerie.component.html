@@ -1,0 +1,7 @@
+<div class="card-columns">
+  <div *ngFor="let col of listePhoto" class="card">
+    <img src="{{col.photoUrl}}" class="card-img-top" alt="photo" data-toggle="modal" data-target=".bd-example-modal-lg"
+      (click)="select2(col.matricule)">
+  </div>
+</div>
+<app-scroll-top></app-scroll-top>

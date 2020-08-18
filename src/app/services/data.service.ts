@@ -1,3 +1,4 @@
+import { MatEtPhotos } from './../models/MatEtPhotos';
 import { Collegue } from '../models/Collegue';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +21,7 @@ const httpOptions = {
 export class DataService {
 
   subjectColSelectionne = new Subject<Collegue>();
+  subjectColSelectionne2 = new Subject<Collegue>();
 
   constructor(private http: HttpClient) { }
 
@@ -29,8 +31,18 @@ export class DataService {
     );
   }
 
+  selectionner2(mat: string): Observable<Collegue> {
+    return this.collegueSelectionneInfo(mat).pipe(
+      tap(col => this.subjectColSelectionne2.next(col))
+    );
+  }
+
   sabonnerAColSelect(): Observable<Collegue> {
     return this.subjectColSelectionne.asObservable();
+  }
+
+  sabonnerAColSelect2(): Observable<Collegue> {
+    return this.subjectColSelectionne2.asObservable();
   }
 
   collegueSelectionneInfo(mat: string): Observable<Collegue> {
@@ -47,5 +59,9 @@ export class DataService {
 
   updateCollegue(updateColValues: UpdateColEmailPhoto): Observable<void> {
     return this.http.patch<void>(`https://robin-collegue-app.herokuapp.com/collegues`, updateColValues, httpOptions);
+  }
+
+  addListPhotos(): Observable<MatEtPhotos[]> {
+    return this.http.get<MatEtPhotos[]>(`https://robin-collegue-app.herokuapp.com/collegues/photos`);
   }
 }

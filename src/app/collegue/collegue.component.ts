@@ -68,11 +68,11 @@ export class NgbdModalContentComponent implements OnInit {
 
   newCollegue: NewCollegue;
 
+  constructor(public activeModal: NgbActiveModal, private dataServ: DataService) { }
+
   ngOnInit(): void {
     this.newCollegue = {};
   }
-
-  constructor(public activeModal: NgbActiveModal, private dataServ: DataService) { }
 
   creerCollegue(): void {
     this.dataServ.creationCollegue(this.newCollegue).subscribe(
@@ -91,7 +91,6 @@ export class NgbdModalContentComponent implements OnInit {
 export class CollegueComponent implements OnInit, OnDestroy {
 
   collegueSelectionne: Subscription;
-
   col: Collegue;
   textShow = true;
   newEmail: string;

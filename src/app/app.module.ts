@@ -11,11 +11,12 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { GalerieComponent, ModalZoomPhotoComponent } from './galerie/galerie.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
+import { AproposComponent } from './apropos/apropos.component';
 
 const ROUTES: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'galerie', component: GalerieComponent },
-  { path: 'Apropos', component: ScrollTopComponent },
+  { path: 'apropos', component: AproposComponent },
   { path: '', pathMatch: 'full', redirectTo: '/accueil' },
 ];
 
@@ -29,7 +30,8 @@ const ROUTES: Routes = [
     NavbarComponent,
     AccueilComponent,
     GalerieComponent,
-    ScrollTopComponent
+    ScrollTopComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,

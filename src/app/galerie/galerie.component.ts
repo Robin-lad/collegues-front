@@ -12,33 +12,33 @@ import { Collegue } from '../models/Collegue';
     <div *ngIf="col" class="card">
       <img id="imgPasTropGrande" class="card-img-top" src="{{col.photoUrl}}" alt="photo">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><span class="colgauche">Matricule </span> <br/>  <span class="coldroite">{{col.matricule}}</span></li>
-        <li class="list-group-item"><span class="colgauche">Nom </span> <br/> <span class="coldroite">{{col.nom}}</span></li>
-        <li class="list-group-item"><span class="colgauche">Prénom </span> <br/> <span class="coldroite">{{col.prenoms}}</span></li>
-        <li class="list-group-item"><span class="colgauche">Date de Naissance </span> <br/> <span class="coldroite">{{col.dateDeNaissance}}</span></li>
-        <li class="list-group-item"><span class="colgauche">Email </span> <br/> <span class="coldroite">{{col.email}}</span></li>
+        <li class="list-group-item"><span class="colgauche">Matricule </span> <br/> {{col.matricule}}</li>
+        <li class="list-group-item"><span class="colgauche">Nom </span> <br/> {{col.nom}}</li>
+        <li class="list-group-item"><span class="colgauche">Prénom </span> <br/> {{col.prenoms}}</li>
+        <li class="list-group-item"><span class="colgauche">Date de Naissance </span> <br/> {{col.dateDeNaissance}}</li>
+        <li class="list-group-item"><span class="colgauche">Email </span> <br/> {{col.email}} <span class="coldroite"><button id="btnCom" type="button" class="btn btn-primary"> Commentaires </button></span></li>
       </ul>
     </div>
   </div>
     `,
-  styles: ['#bodySansPadding { padding: 0px; } #imgPasTropGrande { max-height: 34rem; } .colgauche { font-weight: bold; };']
+  styles: ['#bodySansPadding { padding: 0px; } #imgPasTropGrande { max-height: 34rem; } .colgauche { font-weight: bold; } .coldroite { float:right; } #btnCom { float: right; };']
 })
 export class ModalZoomPhotoComponent implements OnInit, OnDestroy {
 
-  collegueSelectionne2: Subscription;
+  collegueSelectionne: Subscription;
   col: Collegue;
 
   constructor(public activeModal: NgbActiveModal, private dataServ: DataService) { }
 
   ngOnInit(): void {
-    this.collegueSelectionne2 = this.dataServ.sabonnerAColSelect2().subscribe(
+    this.collegueSelectionne = this.dataServ.sabonnerAColSelect().subscribe(
       v => this.col = v,
       err => console.log(err)
     );
   }
 
   ngOnDestroy(): void {
-    this.collegueSelectionne2.unsubscribe();
+    this.collegueSelectionne.unsubscribe();
   }
 }
 
@@ -61,7 +61,7 @@ export class GalerieComponent implements OnInit {
   }
 
   select2(mat: string): void {
-    this.dataServ.selectionner2(mat).subscribe(
+    this.dataServ.selectionner(mat).subscribe(
       () => { },
       err => { }
     );

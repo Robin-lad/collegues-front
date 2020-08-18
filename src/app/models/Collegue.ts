@@ -6,3 +6,4 @@ export interface Collegue {
   dateDeNaissance: Date;
   photoUrl: string;
 }
+
